@@ -165,7 +165,6 @@ class ShowNTell(activity.Activity):
         separator.show()
 
         stop_button = StopButton(self)
-        stop_button.props.accelerator = '<Ctrl><Shift>Q'
         toolbar_box.toolbar.insert(stop_button, -1)
         stop_button.show()
 
