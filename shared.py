@@ -30,7 +30,7 @@ from gi.repository import TelepathyGLib
 
 import dbus
 from dbus.service import method, signal
-from dbus.gobject_service import ExportedGObject
+from dbus.gi_service import ExportedGObject
 
 from sugar3.presence import presenceservice
 from sugar3.presence.tubeconn import TubeConnection
