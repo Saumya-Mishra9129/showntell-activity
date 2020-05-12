@@ -297,7 +297,7 @@ class ThumbViewer(Gtk.DrawingArea):
         # scratch
         timerstart = time.time()
         thumb = self.__deck.getSlideThumb(n)
-        print 'getSlideThumb', n, thumb
+        print('getSlideThumb', n, thumb)
         if thumb and os.path.exists(thumb):
             self.__surface = cairo.ImageSurface.create_from_png(thumb)
         else:

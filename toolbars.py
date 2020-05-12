@@ -56,7 +56,7 @@ def get_mounts():
     for volume in volume_monitor.get_volumes(
     ):  # Get all volumes (mounted and no mounted)
 
-        print "GETTING VOLUMES", volume.get_name(), volume.get_identifier("uuid")
+        print("GETTING VOLUMES", volume.get_name(), volume.get_identifier("uuid"))
 
         if not volume.get_mount():  # Is not mounted
             continue
@@ -91,7 +91,7 @@ class NavToolBar(Gtk.Toolbar):
 
         self.__nextbtn = ToolButton('go-next')
         self.__nextbtn.set_tooltip("Next slide")
-        self.__nextbtn.connect('clicked', self.next)
+        self.__nextbtn.connect('clicked', self.__next__)
         self.insert(self.__nextbtn, -1)
         self.__nextbtn.show()
 
@@ -188,7 +188,7 @@ class NavToolBar(Gtk.Toolbar):
         self.queue_draw()
 
     def next(self, widget):
-        self.__deck.next()
+        next(self.__deck)
 
     def previous(self, widget):
         self.__deck.previous()
@@ -436,7 +436,7 @@ class MakeToolBar(Gtk.Toolbar):
         ds_mounts = get_mounts()
         pendrive = -1
         for i in range(0, len(ds_mounts), 1):
-            print 'mount', i, ds_mounts[i]['uri'], ds_mounts[i]['title'], ds_mounts[i]['id']
+            print('mount', i, ds_mounts[i]['uri'], ds_mounts[i]['title'], ds_mounts[i]['id'])
             if ds_mounts[i]['uri'].find('datastore') > 0:
                 journal = i
             else:
@@ -486,7 +486,7 @@ class MakeToolBar(Gtk.Toolbar):
             title = self.deck.get_title()
         except BaseException:
             title = ""
-        print 'self.__decktitle.set_text', title
+        print('self.__decktitle.set_text', title)
         self.__decktitle.set_text(title)
         self.__decktitle.set_alignment(0)
         self.__decktitle.connect('activate', self.decktitle_change_cb)
@@ -551,7 +551,7 @@ class MakeToolBar(Gtk.Toolbar):
         self.__slidetitle.set_text(self.deck.get_SlideTitle())
 
     def new(self, widget):
-        print 'New slideshow'
+        print('New slideshow')
         # no effect if slideshow is already 'new', e.g. when ShowNTell is opened
         # directly not by read_file
         # this needs to be changed to show slideshow with html title slide
@@ -562,12 +562,12 @@ class MakeToolBar(Gtk.Toolbar):
             'new.cpxo')
 
     def open(self, widget):
-        print 'Open slideshow'
+        print('Open slideshow')
         scrn3 = self.activity.set_screen(2)
         treeview = scrn3.get_treeView()
-        print 'set_cpxo_store'
+        print('set_cpxo_store')
         treeview.set_model(scrn3.set_store("datastore"))
-        print 'slideshow treeview model set'
+        print('slideshow treeview model set')
 
     def help(self, widget):
         scrn3 = self.activity.set_screen(2)

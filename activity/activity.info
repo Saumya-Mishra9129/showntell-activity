@@ -1,7 +1,7 @@
 [Activity]
 name = ShowNTell
 bundle_id = org.laptop.showntell
-exec = sugar-activity showntell.ShowNTell
+exec = sugar-activity3 showntell.ShowNTell
 icon = showntell-activity
 activity_version = 2
 show_launcher = yes

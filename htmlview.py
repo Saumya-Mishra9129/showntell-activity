@@ -21,7 +21,7 @@ class Htmlview(Gtk.VBox):
         self.set_spacing(8)
 
         wv = WebView()
-        print 'show', WORKFILE, path(WORKFILE).exists()
+        print(('show', WORKFILE, path(WORKFILE).exists()))
         wv.load_uri(WORKFILE)
         wv.show()
         self.pack_start(wv, True, True, 0)

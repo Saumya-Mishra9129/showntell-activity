@@ -21,7 +21,7 @@ from datetime import datetime
 
 class Listview(Gtk.VBox):
     def __init__(self, activity, deck):
-        print 'listview init'
+        print('listview init')
         self.activity = activity
         Gtk.VBox.__init__(self)
         vbox = Gtk.VBox(False, 8)
@@ -59,7 +59,7 @@ class Listview(Gtk.VBox):
         return self.treeView
 
     def set_store(self, mountpoint, pth):
-        print 'set_store', mountpoint, pth
+        print('set_store', mountpoint, pth)
         store = Gtk.ListStore(str, str, str, str)
         # get objects from the local datastore
         ds_objects, num_objects = datastore.find({'mountpoints': [mountpoint], 'mime_type': [
@@ -68,7 +68,7 @@ class Listview(Gtk.VBox):
             try:
                 object = f.object_id
             except BaseException:
-                print 'set object_id failed'
+                print('set object_id failed')
             try:
                 title = f.metadata['title']
             except BaseException:
@@ -83,20 +83,20 @@ class Listview(Gtk.VBox):
             except BaseException:
                 timestamp = ""
             store.append([object, title, mime_type, timestamp])
-            print 'store.append', object, title, mime_type, timestamp
+            print('store.append', object, title, mime_type, timestamp)
             f.destroy()
         return store
 
     def on_activated(self, widget, row, col):
 
         model = widget.get_model()
-        print 'row', model[row][0], model[row][1], model[row][2], model[row][3]
+        print('row', model[row][0], model[row][1], model[row][2], model[row][3])
         title = model[row][1]
         mime_type = model[row][2]
         timestamp = model[row][3]
         object = datastore.get(model[row][0])
         fn = object.file_path
-        print 'object filename', path(fn).exists(), fn
+        print('object filename', path(fn).exists(), fn)
         self.deck.addSlide(fn)
         self.deck.reload()
         object.destroy()

@@ -60,10 +60,10 @@ class Deck(GObject.GObject):
         GObject.GObject.__init__(self)
         self.__handle = handle
         if self.__handle.object_id is None:
-            print 'slideshow - from home view'
+            print('slideshow - from home view')
         else:
             obj = datastore.get(self.__handle.object_id)
-            print 'object:', obj.get_file_path()
+            print('object:', obj.get_file_path())
         self.__logger = logging.getLogger('Deck')
         self.__base = base
         self.__rsrc = rsrc
@@ -129,7 +129,7 @@ class Deck(GObject.GObject):
         slide = open(deckpath / 'title.html', 'w')
         slide.write(txt)
         slide.close()
-        print 'title slide changed', title
+        print('title slide changed', title)
 
     def set_title(self, title):
         nodes = self.__dom.getElementsByTagName("title")
@@ -138,7 +138,7 @@ class Deck(GObject.GObject):
         self.save()
         self.goToIndex(0, is_local=False)
         self.emit('deck-changed')
-        print 'set_title', self.get_title()
+        print('set_title', self.get_title())
 
     def get_title(self):
         nodes = self.__dom.getElementsByTagName("title")
@@ -146,7 +146,7 @@ class Deck(GObject.GObject):
 
     def reload(self):
         self.__logger.debug("Reading deck")
-        print 'reload:', self.__xmlpath
+        print('reload:', self.__xmlpath)
         if os.path.exists(self.__xmlpath):
             self.__dom = xml.dom.minidom.parse(self.__xmlpath)
         decks = self.__dom.getElementsByTagName("deck")
@@ -157,11 +157,11 @@ class Deck(GObject.GObject):
         self.__logger.debug(str(self.__nslides) + " slides in show")
         self.goToIndex(0, is_local=False)
         self.emit('deck-changed')
-        print 'deck reloaded'
+        print('deck reloaded')
 
     def save(self, path=None):
         """Writes the XML DOM in memory out to disk"""
-        print 'save:', path
+        print('save:', path)
         if not path:
             path = self.__xmlpath
 
@@ -184,9 +184,9 @@ class Deck(GObject.GObject):
         for slide in slides:
             deck.appendChild(slide)
         dom.appendChild(deck)
-        print '*************rebuild**************************'
-        print dom.toprettyxml()
-        print '**********************************************'
+        print('*************rebuild**************************')
+        print(dom.toprettyxml())
+        print('**********************************************')
         return dom
 
     def getDeckPath(self):
@@ -213,18 +213,18 @@ class Deck(GObject.GObject):
 
         INSTANCE = path(activity.get_activity_root()) / 'instance'
         filepath = path(file_path)
-        print 'addSlide file_path', filepath.exists(), filepath
+        print('addSlide file_path', filepath.exists(), filepath)
         filename = filepath.name
         inpath = INSTANCE / 'deck' / filename
-        print 'inpath', inpath.exists(), inpath
+        print('inpath', inpath.exists(), inpath)
         path.copy(filepath, inpath)
         outpath = path(activity.get_activity_root()) / \
             'instance' / 'deck' / filename
-        print 'outpath=', outpath.exists(), outpath
+        print('outpath=', outpath.exists(), outpath)
         self.resizeImage(inpath, outpath, 640, 480)
-        print 'outpath=', outpath.exists(), outpath
+        print('outpath=', outpath.exists(), outpath)
 
-        print 'get slide dimensions'
+        print('get slide dimensions')
         dims = self.getSlideDimensionsFromXML(0)
         if not dims:
             wf = 640
@@ -233,7 +233,7 @@ class Deck(GObject.GObject):
             wf, hf = dims
         w = str(int(wf))
         h = str(int(hf))
-        print 'add slide', w, h
+        print('add slide', w, h)
         newslide = self.__dom.createElement("slide")
         newslide.setAttribute("height", h)
         newslide.setAttribute("title", "newslide")
@@ -243,9 +243,9 @@ class Deck(GObject.GObject):
         newlayer.appendChild(txt)
         newslide.appendChild(newlayer)
         self.__deck.appendChild(newslide)
-        print '**************addSlide*************'
-        print self.__dom.toprettyxml()
-        print '***********************************'
+        print('**************addSlide*************')
+        print(self.__dom.toprettyxml())
+        print('***********************************')
         self.save()
 
     def removeSlide(self, n):
@@ -506,7 +506,7 @@ class Deck(GObject.GObject):
         if n == -1:
             n = self.__pos
         slide = self.__slides[n]
-        print slide.toprettyxml()
+        print(slide.toprettyxml())
         thumbs = slide.getElementsByTagName("thumb")
         if len(thumbs) < 1:
             return False
@@ -610,13 +610,13 @@ class Deck(GObject.GObject):
             self.doNewIndex()
         else:
             self.__pos = index
-            print 'invalid index', index
+            print('invalid index', index)
 
     def getIndex(self):
         """Returns the index of the current slide"""
         return self.__pos
 
-    def next(self):
+    def __next__(self):
         """Moves to the next slide"""
         self.goToIndex(self.__pos + 1, is_local=True)
 

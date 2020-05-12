@@ -123,7 +123,7 @@ class TextArea(Gtk.HBox):
             if not self.__audiofile:
                 self.__audiofile = self.__deck.get_SlideTitle() + '.ogg'
             audiofile = self.__work_path / 'deck' / self.__audiofile
-            print 'audiofile', n, audiofile
+            print('audiofile', n, audiofile)
             if audiofile.exists():
                 subprocess.call("rm -rf " + str(audiofile), shell=True)
             self.__deck.setSlideClip(audiofile.name, n)
@@ -132,15 +132,15 @@ class TextArea(Gtk.HBox):
             subprocess.call("gst-launch-1.0 " + pipeline, shell=True)
             subprocess.call("amixer cset numid=11 off", shell=True)
             # reset mic boost
-            print 'mic boost off', n, self.__audiofile, path(self.__audiofile).exists()
+            print('mic boost off', n, self.__audiofile, path(self.__audiofile).exists())
         else:
             # turn on mic boost (xo)
-            print 'turn on mic boost'
+            print('turn on mic boost')
             subprocess.call("amixer cset numid=11 on", shell=True)
             #self.__fileout.set_property("location", self.__audiofile)
             #self.__source.set_property("location", AUDIOPATH)
             # self.__player.set_state(Gst.State.PLAYING)
-            print 'recording started'
+            print('recording started')
             self.__pid = subprocess.Popen(
                 "arecord -f cd " + AUDIOPATH, shell=True)
 
@@ -149,7 +149,7 @@ class TextArea(Gtk.HBox):
         if button.get_active():
             # play clip
             clip = self.__deck.getSlideClip()
-            print 'play clip:', clip
+            print('play clip:', clip)
             if clip:
                 cmd = "gst-launch-1.0 filesrc location=" + clip
                 cmd = cmd + " ! decodebin ! audioconvert ! alsasink"

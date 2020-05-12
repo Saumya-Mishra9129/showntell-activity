@@ -111,7 +111,7 @@ class Renderer(object):
         targh = float(surface.get_height())
         x_scale = targw / srcw
         y_scale = targh / srch
-        print 'rendering slide', str(n), "w=", targw, srcw, x_scale, "h=", targh, srch, y_scale
+        print('rendering slide', str(n), "w=", targw, srcw, x_scale, "h=", targh, srch, y_scale)
 
         self.__logger.debug("Surface is " + str(targw) + "x" + str(targh))
 
@@ -138,7 +138,7 @@ class Renderer(object):
         self.__logger.debug("Got layers at " + str(time.time() - timerstart))
         for layer in layers:
             type = utils.getFileType(layer)
-            print 'Drawing layer ', type, layer
+            print('Drawing layer ', type, layer)
             self.__logger.debug("Drawing layer " +
                                 str(layer) +
                                 " " +
@@ -146,7 +146,7 @@ class Renderer(object):
                                 " at " +
                                 str(time.time() -
                                     timerstart))
-            print 'drawing layer', type, str(layer)
+            print('drawing layer', type, str(layer))
             if type == "svg":
                 handle = Rsvg.Handle.new_from_file(layer)
                 handle.render_cairo(ctx)
@@ -168,7 +168,7 @@ class Renderer(object):
                 ctx.fill()
             elif type == "html":
                 # use hulahop to display
-                print 'html slide', self.__htmlflag, layer
+                print('html slide', self.__htmlflag, layer)
                 scrn4 = self.__activity.set_screen(3)
                 if self.__htmlflag:
                     scrn4.add(self.__wv)

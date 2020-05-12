@@ -23,7 +23,7 @@ from datetime import datetime
 
 class Cpxoview(Gtk.VBox):
     def __init__(self, activity, deck):
-        print 'cpxoview init'
+        print('cpxoview init')
         self.activity = activity
         Gtk.VBox.__init__(self)
 
@@ -57,7 +57,7 @@ class Cpxoview(Gtk.VBox):
         return self.treeView
 
     def set_store(self, src):
-        print 'set_store', src
+        print('set_store', src)
         store = Gtk.ListStore(str, str, str)
         # get objects from the local datastore
         if src == "datastore":
@@ -67,7 +67,7 @@ class Cpxoview(Gtk.VBox):
                 try:
                     object = f.object_id
                 except BaseException:
-                    print 'find object_id failed'
+                    print('find object_id failed')
                 try:
                     title = f.metadata['title']
                 except BaseException:
@@ -86,20 +86,20 @@ class Cpxoview(Gtk.VBox):
             for f in srcdir.files('*.cpxo'):
                 store.append([f.name, "", f.getctime()])
         else:
-            print 'error in src', src
-        print 'return cpxo store'
+            print('error in src', src)
+        print('return cpxo store')
         return store
 
     def on_activated(self, widget, row, col):
 
-        print 'cpxo on_activated'
+        print('cpxo on_activated')
         model = widget.get_model()
-        print 'row', model[row][0], model[row][1], model[row][2]
+        print('row', model[row][0], model[row][1], model[row][2])
         title = model[row][1]
         timestamp = model[row][2]
         object = datastore.get(model[row][0])
         fn = object.file_path
-        print 'object filename', path(fn).exists(), fn
+        print('object filename', path(fn).exists(), fn)
         # open slideshow, set Navigation toolbar current
         self.activity.read_file(fn)
         for object in ds_objects:

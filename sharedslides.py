@@ -132,7 +132,7 @@ class SharedSlides(GObject.GObject):
             assert isinstance(addr, dbus.Struct)
             assert len(addr) == 2
             assert isinstance(addr[0], str)
-            assert isinstance(addr[1], (int, long))
+            assert isinstance(addr[1], int)
             assert addr[1] > 0 and addr[1] < 65536
             ip_addr = addr[0]
             port = int(addr[1])

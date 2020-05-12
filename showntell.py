@@ -87,7 +87,7 @@ class ShowNTell(activity.Activity):
         self.__handle = handle
         # Set up the main canvas
         self.__slide_view = Gtk.HBox()
-        print 'enter set_canvas', self.__handle.object_id
+        print('enter set_canvas', self.__handle.object_id)
         self.set_canvas(self.__slide_view)
 
         self.__deck = slideshow.Deck(
@@ -236,7 +236,7 @@ class ShowNTell(activity.Activity):
     # resume from journal
     def read_file(self, file_path):
         self.__logger.debug("read_file " + str(file_path))
-        print 'read_file:', file_path
+        print('read_file:', file_path)
         ftype = utils.getFileType(file_path)
         z = zipfile.ZipFile(file_path, "r")
         for i in z.infolist():
@@ -245,9 +245,9 @@ class ShowNTell(activity.Activity):
             f.close()
         z.close()
         self.__deck.reload()
-        print 'read_file: before', self.__deck.get_title(), self.metadata['title']
+        print('read_file: before', self.__deck.get_title(), self.metadata['title'])
         self.__makeTB.decktitle_set_new(self.metadata['title'])
-        print 'read_file: after', self.__deck.get_title()
+        print('read_file: after', self.__deck.get_title())
         newindex = 0
         if 'current_index' in self.metadata:
             newindex = int(self.metadata.get('current_index', '0'))
@@ -256,13 +256,13 @@ class ShowNTell(activity.Activity):
     # save state in journal for resume
     def write_file(self, file_path):
         self.__logger.debug("write_file " + str(file_path))
-        print 'title', self.__deck.get_title()
+        print('title', self.__deck.get_title())
         self.metadata['title'] = self.__deck.get_title()
         self.metadata['mime_type'] = "application/x-classroompresenter"
         self.metadata['current_index'] = str(self.__deck.getIndex())
         self.__deck.save()
         z = zipfile.ZipFile(file_path, "w")
-        root, dirs, files = os.walk(self.__deck_dir).next()
+        root, dirs, files = next(os.walk(self.__deck_dir))
         for f in files:
             z.write(os.path.join(root, f), f)
         z.close()
