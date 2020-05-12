@@ -64,10 +64,12 @@ except AttributeError:
     pass
 
 # Pre-2.3 workaround for booleans
+'''
 try:
     True, False
 except NameError:
     True, False = 1, 0
+'''
 
 # Pre-2.3 workaround for basestring.
 try:
@@ -76,6 +78,7 @@ except NameError:
     str = (str, str)
 
 # Universal newline support
+
 _textmode = 'r'
 if hasattr(file, 'newlines'):
     _textmode = 'U'
