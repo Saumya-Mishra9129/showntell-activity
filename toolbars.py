@@ -91,7 +91,7 @@ class NavToolBar(Gtk.Toolbar):
 
         self.__nextbtn = ToolButton('go-next')
         self.__nextbtn.set_tooltip("Next slide")
-        self.__nextbtn.connect('clicked', self.__next__)
+        self.__nextbtn.connect('clicked', self.next)
         self.insert(self.__nextbtn, -1)
         self.__nextbtn.show()
 
@@ -188,7 +188,7 @@ class NavToolBar(Gtk.Toolbar):
         self.queue_draw()
 
     def next(self, widget):
-        next(self.__deck)
+        self.__deck.next()
 
     def previous(self, widget):
         self.__deck.previous()
