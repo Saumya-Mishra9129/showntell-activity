@@ -19,7 +19,7 @@ def copy_file(src, dest):
 
 def run_dialog(header, msg):
     """Pops up a blocking dialog box with 'msg'"""
-    d = Gtk.Dialog("Hola", None, Gtk.DialogFlags.MODAL,
+    dialog = Gtk.Dialog("Hola", None, Gtk.DialogFlags.MODAL,
                    (Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT))
 
     hbox = Gtk.HBox(False, 12)
