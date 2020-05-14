@@ -74,7 +74,7 @@ class Cpxoview(Gtk.VBox):
                     title = ""
                 try:
                     t = f.metadata['timestamp']
-                    timestamp = datetime.fromtimestamp(t)
+                    timestamp = str(datetime.fromtimestamp(t))
                 except BaseException:
                     timestamp = ""
                 store.append([object, title, timestamp])
