@@ -31,10 +31,10 @@ from gi.repository import GObject
 
 
 class SlideViewer(Gtk.EventBox):
-    __gsignals__ = {'button_press_event': 'override',
-                    'button_release_event': 'override',
-                    'motion_notify_event': 'override',
-                    'enter_notify_event': 'override',
+    __gsignals__ = {'button-press-event': 'override',
+                    'button-release-event': 'override',
+                    'motion-notify-event': 'override',
+                    'enter-notify-event': 'override',
                     'undo-redo-changed': (GObject.SIGNAL_RUN_LAST,
                                           GObject.TYPE_NONE,
                                           ()),
@@ -178,7 +178,7 @@ class SlideViewer(Gtk.EventBox):
 
 class SlideViewerCanvas(Gtk.DrawingArea):
 
-    __gsignals__ = {'configure_event': 'override',
+    __gsignals__ = {'configure-event': 'override',
                     }
 
     def __init__(self, deck, renderer):
