@@ -177,8 +177,8 @@ class SlideViewer(Gtk.EventBox):
 
 
 class SlideViewerCanvas(Gtk.DrawingArea):
-    __gsignals__ = {'draw': 'override',
-                    'configure_event': 'override',
+
+    __gsignals__ = {'configure_event': 'override',
                     }
 
     def __init__(self, deck, renderer):
@@ -277,9 +277,6 @@ class SlideViewerCanvas(Gtk.DrawingArea):
 
 
 class ThumbViewer(Gtk.DrawingArea):
-
-    __gsignals__ = {'draw': 'override',
-                    }
 
     def __init__(self, deck, renderer, n):
         Gtk.DrawingArea.__init__(self)
