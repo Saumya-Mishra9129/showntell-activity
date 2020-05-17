@@ -44,9 +44,6 @@ class SideBar(Gtk.Notebook):
         self.set_show_border(False)
         self.set_show_tabs(True)
 
-        # self.show_tabs = True
-        # self.show_border = True
-
         self.slide_context_menu = Gtk.Menu()  # Don't need to show menus
 
         # Create the menu items
@@ -81,7 +78,6 @@ class SideBar(Gtk.Notebook):
         event_box.add(self.__viewing_box)
 
         self.append_page(event_box, slide_label)
-        # self.append_page(self.__viewing_box, sub_label)
 
         self.__sublist_store = Gtk.ListStore(str, int)
         self.__sub_col = Gtk.TreeViewColumn("Versions of this slide:")
@@ -93,8 +89,6 @@ class SideBar(Gtk.Notebook):
 
         sub_label = Gtk.Label("Submissions")
         self.append_page(self.__sublist, sub_label)
-
-        # self.__sublist_store.append(["My Ink", -1])
 
         self.load_thumbs()
 
