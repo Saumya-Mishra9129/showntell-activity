@@ -102,6 +102,5 @@ class Cpxoview(Gtk.VBox):
         print 'object filename', path(fn).exists(), fn
         # open slideshow, set Navigation toolbar current
         self.activity.read_file(fn)
-        for object in ds_objects:
-            object.destroy()
+        object.destroy()
         self.activity.set_screen(0)
