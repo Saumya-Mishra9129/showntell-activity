@@ -332,6 +332,7 @@ class Shared(ExportedGObject):
         self.__logger.debug('Trying to find owner of handle %u...', cs_handle)
         my_csh = self.__iface_grp.GetSelfHandle()
         self.__logger.debug('My handle in that group is %u', my_csh)
+        group = self._text_chan[TelepathyGLib.IFACE_CHANNEL_INTERFACE_GROUP]
         if my_csh == cs_handle:
             handle = self.__conn.GetSelfHandle()
             self.__logger.debug(
