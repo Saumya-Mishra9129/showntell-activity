@@ -574,9 +574,9 @@ class Deck(GObject.GObject):
             if len(texttags) > 0:
                 self.__text_tag = texttags[0]
             else:
-                self.__text_tag = self.__dom.createElement(text)
+                self.__text_tag = self.__dom.createElement("text")
                 self.__text_tag.appendChild(self.__dom.createTextNode(""))
-                self.__self_ink_tag.appendChild(text)
+                self.__self_ink_tag.appendChild(self.__text_tag)
             pathtags = self.__self_ink_tag.getElementsByTagName("path")
             for pathstr in pathtags:
                 self.__self_ink.append(pathstr.firstChild.nodeValue)
