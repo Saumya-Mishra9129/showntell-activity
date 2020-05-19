@@ -24,7 +24,6 @@ import gi
 gi.require_version('Gst', '1.0')
 import os
 import time
-from path import path
 import logging
 import subprocess
 from sugar3.activity import activity
@@ -32,7 +31,7 @@ from sugar3.activity import activity
 from gi.repository import Gtk
 from gi.repository import Gst
 
-AUDIOPATH = path(activity.get_activity_root()) / 'data' / 'temp.wav'
+AUDIOPATH = os.path(activity.get_activity_root()) / 'data' / 'temp.wav'
 
 
 class TextArea(Gtk.HBox):
@@ -132,7 +131,7 @@ class TextArea(Gtk.HBox):
             subprocess.call("gst-launch-1.0 " + pipeline, shell=True)
             subprocess.call("amixer cset numid=11 off", shell=True)
             # reset mic boost
-            print('mic boost off', n, self.__audiofile, path(self.__audiofile).exists())
+            print('mic boost off', n, self.__audiofile, os.path(self.__audiofile).exists())
         else:
             # turn on mic boost (xo)
             print('turn on mic boost')

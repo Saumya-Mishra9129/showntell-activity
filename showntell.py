@@ -52,7 +52,6 @@ import utils
 import shared
 import time
 import pdb
-from path import path
 
 import listview
 import cpxoview
@@ -79,10 +78,10 @@ class ShowNTell(activity.Activity):
                             format='%(asctime)s %(levelname)s %(message)s')
         self.__screens = []
         # Find our instance path
-        self.__work_path = path(self.get_activity_root()) / 'instance'
-        self.__save_path = path(self.get_activity_root()) / 'data'
+        self.__work_path = os.path(self.get_activity_root()) / 'instance'
+        self.__save_path = os.path(self.get_activity_root()) / 'data'
         self.__deck_dir = self.__work_path / 'deck'
-        bpth = path(activity.get_bundle_path())
+        bpth = os.path(activity.get_bundle_path())
         self.__rsrc_dir = bpth / 'resources'
         self.__handle = handle
         # Set up the main canvas

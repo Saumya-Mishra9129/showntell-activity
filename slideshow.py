@@ -21,6 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import os
+import shutil
 import sys
 import subprocess
 from time import strftime
@@ -31,7 +32,6 @@ from gi.repository import Gtk
 from gi.repository import GObject
 from gi.repository import GdkPixbuf
 
-from path import path
 from sugar3.activity import activity
 from sugar3.datastore import datastore
 
@@ -76,7 +76,7 @@ class Deck(GObject.GObject):
         self.__text_tag = None
         self.__xmlpath = os.path.join(base, "deck.xml")
         # we always create a new presentation and copy over it on resume
-        if path(base).exists():
+        if os.path(base).exists():
             # we can't have permissions.info for this to work
             subprocess.call(
                 "cp -r " +
@@ -86,10 +86,10 @@ class Deck(GObject.GObject):
                 shell=True)
             subprocess.call("rm -rf " + base + '/*', shell=True)
         else:
-            path.mkdir(base)
-        path.copy(self.__rsrc / 'deck.xml', base / 'deck.xml')
-        path.copy(self.__rsrc / 'title.html', base / 'title.html')
-        path.copy(self.__rsrc / 'title_thumb.png', base / 'title_thumb.png')
+            os.mkdir(base)
+        shutil.copy(self.__rsrc / 'deck.xml', base / 'deck.xml')
+        shutil.copy(self.__rsrc / 'title.html', base / 'title.html')
+        shutil.copy(self.__rsrc / 'title_thumb.png', base / 'title_thumb.png')
         self.reload()
         self.set_title('New')
 
@@ -112,7 +112,7 @@ class Deck(GObject.GObject):
         # open and read title.html
         self.__work_path = os.path.join(
             activity.get_activity_root(), 'instance')
-        deckpath = path(activity.get_activity_root()) / 'instance' / 'deck'
+        deckpath = os.path(activity.get_activity_root()) / 'instance' / 'deck'
         slide = open(deckpath / 'title.html', 'r')
         txt = slide.read()
         slide.close()
@@ -211,14 +211,14 @@ class Deck(GObject.GObject):
 
     def addSlide(self, file_path):
 
-        INSTANCE = path(activity.get_activity_root()) / 'instance'
-        filepath = path(file_path)
+        INSTANCE = os.path(activity.get_activity_root()) / 'instance'
+        filepath = os.path(file_path)
         print('addSlide file_path', filepath.exists(), filepath)
         filename = filepath.name
         inpath = INSTANCE / 'deck' / filename
         print('inpath', inpath.exists(), inpath)
-        path.copy(filepath, inpath)
-        outpath = path(activity.get_activity_root()) / \
+        shutil.copy(filepath, inpath)
+        outpath = os.path(activity.get_activity_root()) / \
             'instance' / 'deck' / filename
         print('outpath=', outpath.exists(), outpath)
         self.resizeImage(inpath, outpath, 640, 480)
