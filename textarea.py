@@ -24,7 +24,6 @@ import gi
 gi.require_version('Gst', '1.0')
 import os
 import time
-from path import path
 import logging
 import subprocess
 from sugar3.activity import activity
@@ -32,7 +31,7 @@ from sugar3.activity import activity
 from gi.repository import Gtk
 from gi.repository import Gst
 
-AUDIOPATH = path(activity.get_activity_root()) / 'data' / 'temp.wav'
+AUDIOPATH = os.path.join(activity.get_activity_root() , 'data' , 'temp.wav')
 
 
 class TextArea(Gtk.HBox):
@@ -122,7 +121,7 @@ class TextArea(Gtk.HBox):
             self.__audiofile = self.__deck.getSlideClip(n)
             if not self.__audiofile:
                 self.__audiofile = self.__deck.get_SlideTitle() + '.ogg'
-            audiofile = self.__work_path / 'deck' / self.__audiofile
+            audiofile = self.__work_path + '/deck/' + self.__audiofile
             print('audiofile', n, audiofile)
             if audiofile.exists():
                 subprocess.call("rm -rf " + str(audiofile), shell=True)
@@ -132,7 +131,7 @@ class TextArea(Gtk.HBox):
             subprocess.call("gst-launch-1.0 " + pipeline, shell=True)
             subprocess.call("amixer cset numid=11 off", shell=True)
             # reset mic boost
-            print('mic boost off', n, self.__audiofile, path(self.__audiofile).exists())
+            print('mic boost off', n, self.__audiofile, os.path.exists(self.__audiofile))
         else:
             # turn on mic boost (xo)
             print('turn on mic boost')

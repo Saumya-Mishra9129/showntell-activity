@@ -17,7 +17,6 @@ from gi.repository import Gtk
 from sugar3.activity import activity
 from sugar3.datastore import datastore
 
-from path import path
 from datetime import datetime
 
 
@@ -81,8 +80,7 @@ class Cpxoview(Gtk.VBox):
                 f.destroy()
         elif src == "activity":
             # source is activity bundle
-            srcdir = path(activity.get_bundle_path()) / \
-                'resources' / 'Presentations'
+            srcdir = os.path.join(activity.get_bundle_path() , 'resources' , 'Presentations')
             for f in srcdir.files('*.cpxo'):
                 store.append([f.name, "", f.getctime()])
         else:
@@ -99,7 +97,7 @@ class Cpxoview(Gtk.VBox):
         timestamp = model[row][2]
         object = datastore.get(model[row][0])
         fn = object.file_path
-        print('object filename', path(fn).exists(), fn)
+        print('object filename', os.path.exists(fn), fn)
         # open slideshow, set Navigation toolbar current
         self.activity.read_file(fn)
         for object in ds_objects:

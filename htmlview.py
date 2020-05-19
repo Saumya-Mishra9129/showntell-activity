@@ -5,13 +5,12 @@ from gi.repository.WebKit2 import WebView
 
 from sugar3 import env
 from sugar3.activity import activity
-from path import path
 ##hulahop.startup(os.path.join(env.get_profile_path(), 'gecko'))
 
-BUNDLEPATH = path(activity.get_bundle_path()) / 'tw'
-DATAPATH = path(activity.get_activity_root()) / 'data'
-TESTFILE = BUNDLEPATH / 'slides.html'
-WORKFILE = 'file://' + DATAPATH / 'slides.html'
+BUNDLEPATH = os.path.join(activity.get_bundle_path() , 'tw')
+DATAPATH = os.path.join(activity.get_activity_root() , 'data')
+TESTFILE = BUNDLEPATH + '/slides.html'
+WORKFILE = 'file://' + DATAPATH + '/slides.html'
 
 
 class Htmlview(Gtk.VBox):
@@ -21,7 +20,7 @@ class Htmlview(Gtk.VBox):
         self.set_spacing(8)
 
         wv = WebView()
-        print(('show', WORKFILE, path(WORKFILE).exists()))
+        print(('show', WORKFILE, os.path.exists(WORKFILE)))
         wv.load_uri(WORKFILE)
         wv.show()
         self.pack_start(wv, True, True, 0)

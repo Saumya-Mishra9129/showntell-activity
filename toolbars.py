@@ -29,7 +29,6 @@ import os
 import sys
 from time import strftime
 import utils
-from path import path
 import slideshow
 import subprocess
 import listview
@@ -556,10 +555,10 @@ class MakeToolBar(Gtk.Toolbar):
         # directly not by read_file
         # this needs to be changed to show slideshow with html title slide
         self.activity.read_file(
-            path(
-                activity.get_bundle_path()) /
-            'resources' /
-            'new.cpxo')
+            os.path.join(
+                activity.get_bundle_path(),
+                'resources',
+                'new.cpxo'))
 
     def open(self, widget):
         print('Open slideshow')
@@ -572,7 +571,7 @@ class MakeToolBar(Gtk.Toolbar):
     def help(self, widget):
         scrn3 = self.activity.set_screen(2)
         # here select help.cpxo in resources
-        fn = path(activity.get_bundle_path()) / 'resources' / 'help.cpxo'
+        fn = os.path.join(activity.get_bundle_path(), 'resources', 'help.cpxo')
         self.activity.read_file(fn)
 
     def chooseimage(self, widget, source, pth):
