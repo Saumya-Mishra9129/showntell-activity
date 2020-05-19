@@ -31,7 +31,7 @@ from sugar3.activity import activity
 from gi.repository import Gtk
 from gi.repository import Gst
 
-AUDIOPATH = os.path(activity.get_activity_root()) / 'data' / 'temp.wav'
+AUDIOPATH = os.path.join(activity.get_activity_root() , 'data' , 'temp.wav')
 
 
 class TextArea(Gtk.HBox):
@@ -121,7 +121,7 @@ class TextArea(Gtk.HBox):
             self.__audiofile = self.__deck.getSlideClip(n)
             if not self.__audiofile:
                 self.__audiofile = self.__deck.get_SlideTitle() + '.ogg'
-            audiofile = self.__work_path / 'deck' / self.__audiofile
+            audiofile = self.__work_path + '/deck/' + self.__audiofile
             print('audiofile', n, audiofile)
             if audiofile.exists():
                 subprocess.call("rm -rf " + str(audiofile), shell=True)

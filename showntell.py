@@ -78,11 +78,11 @@ class ShowNTell(activity.Activity):
                             format='%(asctime)s %(levelname)s %(message)s')
         self.__screens = []
         # Find our instance path
-        self.__work_path = os.path(self.get_activity_root()) / 'instance'
-        self.__save_path = os.path(self.get_activity_root()) / 'data'
-        self.__deck_dir = self.__work_path / 'deck'
+        self.__work_path = os.path.join(self.get_activity_root() , 'instance')
+        self.__save_path = os.path.join(self.get_activity_root() , 'data')
+        self.__deck_dir = self.__work_path + 'deck'
         bpth = os.path(activity.get_bundle_path())
-        self.__rsrc_dir = bpth / 'resources'
+        self.__rsrc_dir = bpth + 'resources'
         self.__handle = handle
         # Set up the main canvas
         self.__slide_view = Gtk.HBox()

@@ -80,8 +80,7 @@ class Cpxoview(Gtk.VBox):
                 f.destroy()
         elif src == "activity":
             # source is activity bundle
-            srcdir = os.path(activity.get_bundle_path()) / \
-                'resources' / 'Presentations'
+            srcdir = os.path.join(activity.get_bundle_path() , 'resources' , 'Presentations')
             for f in srcdir.files('*.cpxo'):
                 store.append([f.name, "", f.getctime()])
         else:

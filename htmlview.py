@@ -7,10 +7,10 @@ from sugar3 import env
 from sugar3.activity import activity
 ##hulahop.startup(os.path.join(env.get_profile_path(), 'gecko'))
 
-BUNDLEPATH = os.path(activity.get_bundle_path()) / 'tw'
-DATAPATH = os.path(activity.get_activity_root()) / 'data'
-TESTFILE = BUNDLEPATH / 'slides.html'
-WORKFILE = 'file://' + DATAPATH / 'slides.html'
+BUNDLEPATH = os.path.join(activity.get_bundle_path() , 'tw')
+DATAPATH = os.path.join(activity.get_activity_root() , 'data')
+TESTFILE = BUNDLEPATH + 'slides.html'
+WORKFILE = 'file://' + DATAPATH + 'slides.html'
 
 
 class Htmlview(Gtk.VBox):

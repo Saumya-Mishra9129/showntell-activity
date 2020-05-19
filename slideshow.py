@@ -87,9 +87,12 @@ class Deck(GObject.GObject):
             subprocess.call("rm -rf " + base + '/*', shell=True)
         else:
             os.mkdir(base)
-        shutil.copy(self.__rsrc / 'deck.xml', base / 'deck.xml')
-        shutil.copy(self.__rsrc / 'title.html', base / 'title.html')
-        shutil.copy(self.__rsrc / 'title_thumb.png', base / 'title_thumb.png')
+        shutil.copy(self.__rsrc + '/deck.xml',
+                    base + '/deck.xml')
+        shutil.copy(self.__rsrc + '/title.html',
+                    base + '/title.html')
+        shutil.copy(self.__rsrc + '/title_thumb.png',
+                    base + '/title_thumb.png')
         self.reload()
         self.set_title('New')
 
@@ -112,8 +115,9 @@ class Deck(GObject.GObject):
         # open and read title.html
         self.__work_path = os.path.join(
             activity.get_activity_root(), 'instance')
-        deckpath = os.path(activity.get_activity_root()) / 'instance' / 'deck'
-        slide = open(deckpath / 'title.html', 'r')
+        deckpath = os.path.join(activity.get_activity_root() , 'instance' , 'deck')
+        file_path = os.path.join(deckpath,'title.html')
+        slide = open(file_path, 'r')
         txt = slide.read()
         slide.close()
         # here change title.html - change between <h1> and </h1>
@@ -126,7 +130,7 @@ class Deck(GObject.GObject):
         txt = txtmod[:h3pos + 4] + \
             strftime("%a, %b %d, %Y %H:%M") + txtmod[h3end:]
         # save title.html and close
-        slide = open(deckpath / 'title.html', 'w')
+        slide = open(file_path, 'w')
         slide.write(txt)
         slide.close()
         print('title slide changed', title)
@@ -211,15 +215,14 @@ class Deck(GObject.GObject):
 
     def addSlide(self, file_path):
 
-        INSTANCE = os.path(activity.get_activity_root()) / 'instance'
         filepath = os.path(file_path)
         print('addSlide file_path', filepath.exists(), filepath)
         filename = filepath.name
-        inpath = INSTANCE / 'deck' / filename
+        inpath = os.path.join(activity.get_activity_root(), 'instance','deck',filename)
         print('inpath', inpath.exists(), inpath)
         shutil.copy(filepath, inpath)
-        outpath = os.path(activity.get_activity_root()) / \
-            'instance' / 'deck' / filename
+        outpath = os.path.join(activity.get_activity_root(),
+                               'instance', 'deck', filename)
         print('outpath=', outpath.exists(), outpath)
         self.resizeImage(inpath, outpath, 640, 480)
         print('outpath=', outpath.exists(), outpath)
