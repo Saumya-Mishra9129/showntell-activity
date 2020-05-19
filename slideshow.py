@@ -76,7 +76,7 @@ class Deck(GObject.GObject):
         self.__text_tag = None
         self.__xmlpath = os.path.join(base, "deck.xml")
         # we always create a new presentation and copy over it on resume
-        if os.path(base).exists():
+        if os.path.exists(base):
             # we can't have permissions.info for this to work
             subprocess.call(
                 "cp -r " +
@@ -215,7 +215,7 @@ class Deck(GObject.GObject):
 
     def addSlide(self, file_path):
 
-        filepath = os.path(file_path)
+        filepath = os.path.abspath(file_path)
         print('addSlide file_path', filepath.exists(), filepath)
         filename = filepath.name
         inpath = os.path.join(activity.get_activity_root(), 'instance','deck',filename)

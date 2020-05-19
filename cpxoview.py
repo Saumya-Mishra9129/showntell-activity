@@ -97,7 +97,7 @@ class Cpxoview(Gtk.VBox):
         timestamp = model[row][2]
         object = datastore.get(model[row][0])
         fn = object.file_path
-        print('object filename', os.path(fn).exists(), fn)
+        print('object filename', os.path.exists(fn), fn)
         # open slideshow, set Navigation toolbar current
         self.activity.read_file(fn)
         for object in ds_objects:

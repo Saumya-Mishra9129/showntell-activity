@@ -95,7 +95,7 @@ class Listview(Gtk.VBox):
         timestamp = model[row][3]
         object = datastore.get(model[row][0])
         fn = object.file_path
-        print('object filename', os.path(fn).exists(), fn)
+        print('object filename', os.path.exists(fn), fn)
         self.deck.addSlide(fn)
         self.deck.reload()
         object.destroy()

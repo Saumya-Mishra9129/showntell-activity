@@ -131,7 +131,7 @@ class TextArea(Gtk.HBox):
             subprocess.call("gst-launch-1.0 " + pipeline, shell=True)
             subprocess.call("amixer cset numid=11 off", shell=True)
             # reset mic boost
-            print('mic boost off', n, self.__audiofile, os.path(self.__audiofile).exists())
+            print('mic boost off', n, self.__audiofile, os.path.exists(self.__audiofile))
         else:
             # turn on mic boost (xo)
             print('turn on mic boost')
