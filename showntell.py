@@ -267,7 +267,7 @@ class ShowNTell(activity.Activity):
         z.close()
 
     def get_shared_activity(self):
-        return self._shared_activity
+        return self.__shared
 
     def set_screen(self, scrn):
         if len(self.__screens) < 1:
